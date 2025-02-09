@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FizzBuzz Challenge</title>
+    <script>
+        function fizzBuzz(start, end, rules) {
+            for (let i = start; i <= end; i++) {
+                let output = '';
+                for (let rule of rules) {
+                    if (i % rule.divisor === 0) {
+                        output += rule.label;
+                    }
+                }
+                document.write(output || i);
+                document.write('<br>');
+            }
+        }
+
+        function startFizzBuzz() {
+            let rules = [];
+            if (document.getElementById("standard").checked) {
+                rules = [
+                    { divisor: 3, label: 'Fizz' },
+                    { divisor: 5, label: 'Buzz' }
+                ];
+            } else if (document.getElementById("customRules").checked) {
+                const customDiv1 = parseInt(document.getElementById("customDiv1").value);
+                const customLabel1 = document.getElementById("customLabel1").value;
+                if (customDiv1 && customLabel1) {
+                    rules.push({ divisor: customDiv1, label: customLabel1 });
+                }
+
+                const customDiv2 = parseInt(document.getElementById("customDiv2").value);
+                const customLabel2 = document.getElementById("customLabel2").value;
+                if (customDiv2 && customLabel2) {
+                    rules.push({ divisor: customDiv2, label: customLabel2 });
+                }
+            }
+
+            document.write("<h2>FizzBuzz Results:</h2>");
+            fizzBuzz(1, 50, rules);
+        }
+    </script>
+</head>
+<body>
+    <h1>FizzBuzz Challenge</h1>
+    <p>Select the FizzBuzz game mode:</p>
+    <input type="radio" id="standard" name="gameMode" value="standard" checked>
+    <label for="standard">Standard FizzBuzz</label><br>
+    <input type="radio" id="customRules" name="gameMode" value="customRules">
+    <label for="customRules">Custom Divisibility Rules</label><br>
+    <div id="customRulesSection" style="display:none;">
+        <p>Define custom rules (optional):</p>
+        <label for="customDiv1">Divisor 1:</label>
+        <input type="number" id="customDiv1" min="1">
+        <label for="customLabel1">Label 1:</label>
+        <input type="text" id="customLabel1">
+        <br>
+        <label for="customDiv2">Divisor 2:</label>
+        <input type="number" id="customDiv2" min="1">
+        <label for="customLabel2">Label 2:</label>
+        <input type="text" id="customLabel2">
+    </div>
+    <br>
+    <button onclick="startFizzBuzz()">Start FizzBuzz</button>
+
+    <script>
+        document.getElementById("standard").addEventListener("change", function() {
+            document.getElementById("customRulesSection").style.display = "none";
+        });
+        document.getElementById("customRules").addEventListener("change", function() {
+            document.getElementById("customRulesSection").style.display = "block";
+        });
+    </script>
+</body>
+</html>

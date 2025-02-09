@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Character and Word Counter</title>
+    <style>
+        .highlight {
+            background-color: rgba(141, 233, 245, 0.736);
+        }
+    </style>
+    <script>
+        function countCharactersAndWords() {
+            var inputText = document.getElementById("inputText").value;
+            var charCount = inputText.length;
+            var wordCount = inputText.trim().split(/\s+/).length;
+            
+            document.getElementById("charCount").innerText = "Number of characters (including spaces): " + charCount;
+            document.getElementById("wordCount").innerText = "Number of words: " + wordCount;
+
+            highlightRepeatedWords(inputText);
+        }
+
+        function highlightRepeatedWords(text) {
+            var words = text.trim().split(/\s+/);
+            var wordFrequency = {};
+            words.forEach(function(word) {
+                word = word.toLowerCase();
+                if (wordFrequency[word]) {
+                    wordFrequency[word]++;
+                } else {
+                    wordFrequency[word] = 1;
+                }
+            });
+
+            var highlightedText = words.map(function(word) {
+                if (wordFrequency[word.toLowerCase()] > 1) {
+                    return '<span class="highlight">' + word + '</span>';
+                } else {
+                    return word;
+                }
+            }).join(' ');
+
+            document.getElementById("highlightedText").innerHTML = highlightedText;
+        }
+    </script>
+</head>
+<body>
+    <h1>Character and Word Counter</h1>
+    <textarea id="inputText" onkeyup="countCharactersAndWords()" rows="4" cols="50" placeholder="Type your text here..."></textarea>
+    <p id="charCount">Number of characters (including spaces): 0</p>
+    <p id="wordCount">Number of words: 0</p>
+    <p>Highlighted repeated words:</p>
+    <p id="highlightedText"></p>
+</body>
+</html>

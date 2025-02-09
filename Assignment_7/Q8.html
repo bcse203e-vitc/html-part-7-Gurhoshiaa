@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bubble Sort</title>
+    <script>
+        function bubbleSort(arr, order = "asc") {
+            let n = arr.length;
+            for (let i = 0; i < n - 1; i++) {
+                for (let j = 0; j < n - i - 1; j++) {
+                    if ((order === "asc" && arr[j] > arr[j + 1]) || (order === "desc" && arr[j] < arr[j + 1])) {
+                        let temp = arr[j];
+                        arr[j] = arr[j + 1];
+                        arr[j + 1] = temp;
+                    }
+                }
+            }
+            return arr;
+        }
+
+        function processArray() {
+            let input = document.getElementById("inputArray").value;
+            let arr = input.split(',').map(Number);
+
+            let sortedAsc = bubbleSort(arr.slice(), "asc");
+            let sortedDesc = bubbleSort(arr.slice(), "desc");
+
+            document.write("<p>Input Array: " + arr.join(', ') + "</p>");
+            document.write("<p>Sorted Array (Ascending): " + sortedAsc.join(', ') + "</p>");
+            document.write("<p>Sorted Array (Descending): " + sortedDesc.join(', ') + "</p>");
+        }
+    </script>
+</head>
+<body>
+    <h1>Bubble Sort</h1>
+    <p>Enter numbers separated by commas (e.g., 1,2,3,4,5):</p>
+    <input type="text" id="inputArray">
+    <button onclick="processArray()">Process Array</button>
+</body>
+</html>

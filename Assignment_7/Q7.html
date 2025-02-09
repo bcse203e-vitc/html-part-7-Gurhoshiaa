@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Find Second and Third Largest Numbers</title>
+    <script>
+        function findSecondAndThirdLargest(arr) {
+            if (arr.length < 2) return { secondLargest: null, thirdLargest: null };
+
+            let firstLargest = arr[0];
+            let secondLargest = arr[0];
+            let thirdLargest = arr[0];
+
+            for (let num of arr) {
+                if (num > firstLargest) {
+                    thirdLargest = secondLargest;
+                    secondLargest = firstLargest;
+                    firstLargest = num;
+                } else if (num > secondLargest && num < firstLargest) {
+                    thirdLargest = secondLargest;
+                    secondLargest = num;
+                } else if (num > thirdLargest && num < secondLargest) {
+                    thirdLargest = num;
+                }
+            }
+
+            return { secondLargest, thirdLargest };
+        }
+
+        function processArray() {
+            let input = document.getElementById("inputArray").value;
+            let arr = input.split(',').map(Number);
+
+            let result = findSecondAndThirdLargest(arr);
+
+            document.write("<p>Input Array: " + arr.join(', ') + "</p>");
+            document.write("<p>Second Largest Number: " + result.secondLargest + "</p>");
+            document.write("<p>Third Largest Number: " + result.thirdLargest + "</p>");
+        }
+    </script>
+</head>
+<body>
+    <h1>Find Second and Third Largest Numbers in an Array</h1>
+    <p>Enter numbers separated by commas (e.g., 1,2,3,4,5):</p>
+    <input type="text" id="inputArray">
+    <button onclick="processArray()">Process Array</button>
+</body>
+</html>

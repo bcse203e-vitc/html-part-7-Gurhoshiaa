@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Find Duplicates in an Array</title>
+    <script>
+        function findDuplicates(arr) {
+            let duplicates = [];
+            let uniqueElements = new Set();
+
+            arr.forEach(element => {
+                if (uniqueElements.has(element)) {
+                    duplicates.push(element);
+                } else {
+                    uniqueElements.add(element);
+                }
+            });
+
+            return duplicates;
+        }
+
+        function removeDuplicates(arr) {
+            let uniqueArray = Array.from(new Set(arr));
+            return uniqueArray;
+        }
+
+        function processArray() {
+            let input = document.getElementById("inputArray").value;
+            let arr = input.split(',').map(Number);
+
+            let duplicates = findDuplicates(arr);
+            let uniqueArray = removeDuplicates(arr);
+
+            document.write("<p>Input Array: " + arr.join(', ') + "</p>");
+            document.write("<p>Duplicate Values: " + duplicates.join(', ') + "</p>");
+            document.write("<p>Unique Array: " + uniqueArray.join(', ') + "</p>");
+        }
+    </script>
+</head>
+<body>
+    <h1>Find Duplicates in an Array</h1>
+    <p>Enter numbers separated by commas (e.g., 1,2,3,4,5,3,2,1):</p>
+    <input type="text" id="inputArray">
+    <button onclick="processArray()">Process Array</button>
+</body>
+</html>

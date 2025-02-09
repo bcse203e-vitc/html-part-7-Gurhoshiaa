@@ -1,1 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Guess the Number Game</title>
+    <script>
+        var randomNumber = Math.floor(Math.random() * 100) + 1;
+        var attempts = 0;
+        var maxAttempts = 5;
 
+        function guessNumber() {
+            var userGuess = parseInt(document.getElementById("guess").value);
+            attempts++;
+
+            if (userGuess === randomNumber) {
+                document.write("<p>Congratulations! You guessed the correct number in " + attempts + " attempts.</p>");
+            } else if (attempts >= maxAttempts) {
+                document.write("<p>Sorry, you've exceeded the maximum number of attempts. The correct number was " + randomNumber + ".</p>");
+            } else if (userGuess > randomNumber) {
+                document.getElementById("hint").innerHTML = "<p>Too high! Try again. You have " + (maxAttempts - attempts) + " attempts left.</p>";
+            } else {
+                document.getElementById("hint").innerHTML = "<p>Too low! Try again. You have " + (maxAttempts - attempts) + " attempts left.</p>";
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Guess the Number Game</h1>
+    <p>Guess a number between 1 and 100:</p>
+    <input type="number" id="guess" min="1" max="100">
+    <button onclick="guessNumber()">Guess</button>
+    <div id="hint"></div>
+</body>
+</html>

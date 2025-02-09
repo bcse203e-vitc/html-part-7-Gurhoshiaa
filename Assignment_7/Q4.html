@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Palindrome Checker</title>
+    <script>
+        function isPalindrome(str) {
+            var cleanStr = str.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
+            var reversedStr = cleanStr.split('').reverse().join('');
+            return cleanStr === reversedStr;
+        }
+
+        function checkPalindrome() {
+            var inputStr = document.getElementById("inputStr").value;
+            var result = isPalindrome(inputStr);
+            document.getElementById("result").innerHTML = result ? "It's a palindrome!" : "It's not a palindrome.";
+        }
+    </script>
+</head>
+<body>
+    <h1>Palindrome Checker</h1>
+    <p>Enter a word or sentence:</p>
+    <input type="text" id="inputStr" onkeyup="checkPalindrome()">
+    <p id="result"></p>
+</body>
+</html>
